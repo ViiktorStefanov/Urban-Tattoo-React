@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Permanent Marker';
+    src: url('../../../public/assets/fonts/PermanentMarker-Regular.ttf');
+}
+
+header {
+    z-index: 100;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: black;
+    font-family: 'Permanent Marker';
+    color: #fff;
+}
