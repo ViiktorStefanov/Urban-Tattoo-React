@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface CounterState {
-  value: number;
+type TattooState = {
+  status: 'idle' | 'loading' | 'succeeded' | 'failed',
+  error: string | null,
 }
 
-const initialState: CounterState = {
-  value: 0,
+const initialState: TattooState = {
+  status: 'idle',
+  error: null,
 };
 
 const tattooSlice = createSlice({
@@ -13,7 +15,6 @@ const tattooSlice = createSlice({
   initialState,
   reducers: {
     increment: (state) => {
-      state.value += 1;
     },
   },
 });

@@ -1,3 +1,5 @@
+@use './styles/fonts' as *;
+
 * {
     box-sizing: border-box;
     margin: 0px;
@@ -7,6 +9,7 @@
 body {
     background: black;
     text-align: center;
+    font-family: $font-primary;
 
 }
 

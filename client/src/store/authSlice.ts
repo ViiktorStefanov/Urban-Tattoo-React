@@ -1,11 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User } from '../types/User';
 
-type CounterState = {
-  value: number;
-}
+type AuthState = {
+  user: User | null,
+  status: 'idle' | 'loading' | 'succeeded' | 'failed',
+  error: string | null,
+  isAuthenticated: boolean,
+};
 
-const initialState: CounterState = {
-  value: 0,
+const initialState: AuthState = {
+  user: null,
+  status: 'idle',
+  error: null,
+  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
