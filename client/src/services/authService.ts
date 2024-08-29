@@ -1,4 +1,4 @@
-import { LoginData, RegisterData, User } from '../types/User';
+import { EditProfileData, LoginData, RegisterData, User } from '../types/User';
 import { get, post, del, put } from './request';
 
 const endpoints = {
@@ -16,7 +16,7 @@ const register = async (data: RegisterData) => await post(endpoints.register, da
 
 const userLogout = async (user: User) => await get(endpoints.logout,null, user);
 
-// const userEdit = async (data, user) => await put(endpoints.edit + user._id, data, user);
+const userEdit = async (data: EditProfileData, user: User) => await put(endpoints.edit + user._id, data, user);
 
 // const userDelete = async (user) => await del(endpoints.delete + user._id, null, user);
 
@@ -28,7 +28,7 @@ export {
     login,
     register,
     userLogout,
-    // userEdit,
+    userEdit,
     // userDelete,
     // userUpdateReservations,
     getAllUserReservations,

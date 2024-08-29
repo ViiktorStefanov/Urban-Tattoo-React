@@ -37,8 +37,17 @@ const authSlice = createSlice({
     setIsMobile: (state, action: PayloadAction<boolean>) => {
       state.isMobile = action.payload;
     },
+    setIsLoading: (state) => {
+      state.status = 'loading';
+    },
+    setIsSucessful: (state) => {
+      state.status = 'succeeded';
+    },
+    setIsFailed: (state) => {
+      state.status = 'failed';
+    },
   },
 });
 
-export const { setIsMobile, setUser, clearUser } = authSlice.actions;
+export const { setIsMobile, setUser, clearUser, setIsLoading, setIsSucessful, setIsFailed } = authSlice.actions;
 export default authSlice.reducer;

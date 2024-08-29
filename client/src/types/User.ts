@@ -24,3 +24,9 @@ export type RegisterData = {
     repeatPassword: string
     phone: string,
 };
+
+export type EditProfileData = {
+    firstName: string,
+    lastName: string,
+    phone: string,
+};

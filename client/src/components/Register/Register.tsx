@@ -7,7 +7,7 @@ import useForm from '../../hooks/useForm';
 import { registerMessages } from '../../constants/validationMessages';
 import notification from '../../services/notification';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../store/authSlice';
+import { setIsFailed, setIsLoading, setIsSucessful, setUser } from '../../store/authSlice';
 import { register } from '../../services/authService';
 
 const Register: React.FC = () => {
@@ -47,14 +47,17 @@ const onRegisterSubmit = async (data: any) => {
 
     try {
         setIsSubmit(true);
+        dispatch(setIsLoading());
         const result = await register(registerData);
         notification.success('Registration successful', 3000);
         dispatch(setUser(result));
         navigate('/')
     } catch (e:any) {
+        dispatch(setIsFailed());
         return notification.error(e.message, 3000);
     } finally {
         setIsSubmit(false);
+        dispatch(setIsSucessful());
     }
 
 };

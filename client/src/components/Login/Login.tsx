@@ -11,7 +11,7 @@ import notification from '../../services/notification';
 import { LoginData } from '../../types/User';
 import { login } from '../../services/authService';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../store/authSlice';
+import { setIsFailed, setIsLoading, setIsSucessful, setUser } from '../../store/authSlice';
 
 
 const Login: React.FC = () => {
@@ -38,16 +38,20 @@ const Login: React.FC = () => {
 
     try {
       setIsSubmit(true);
+      dispatch(setIsLoading());
       const result = await login(data);
       notification.success('Login Successful', 3000);
       dispatch(setUser(result))
       navigate('/')
     } catch (e: any) {
       if (e.status === 403) {
+          dispatch(setIsFailed());
           return notification.error('Invalid email or password', 3000);
       }
+      dispatch(setIsFailed());
       notification.error(e.message, 3000);
     } finally {
+      dispatch(setIsSucessful());
       setIsSubmit(false);
     }
 }

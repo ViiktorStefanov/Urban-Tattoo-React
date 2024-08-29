@@ -7,7 +7,7 @@ import { CgProfile, CgLogOut } from 'react-icons/cg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import notification from '../../services/notification';
-import { clearUser } from '../../store/authSlice';
+import { clearUser, setIsFailed, setIsLoading, setIsSucessful } from '../../store/authSlice';
 import { userLogout } from '../../services/authService';
 
 const ProfileUser: React.FC = () => {
@@ -22,15 +22,17 @@ const ProfileUser: React.FC = () => {
   const onLogout = async () => {
     try {
       setIsSubmit(true);
-      notification.loading('Please wait');
+      dispatch(setIsLoading());
       await userLogout(user!);
       dispatch(clearUser())
-      notification.update('Logout successful');
+      notification.success('Logout successful');
       navigate('/');
     } catch (e: any) {
-      notification.update(e.message, 3000, 'error');
+      dispatch(setIsFailed());
+      notification.error(e.message, 3000);
     } finally {
       setIsSubmit(false);
+      dispatch(setIsSucessful());
     }
   }
 
