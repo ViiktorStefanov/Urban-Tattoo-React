@@ -29,7 +29,7 @@ const ProfileMenu: React.FC = () => {
 
             <div className={`${styles['dropdown-menu']} ${showMenu ? styles['active'] : styles['inactive']}`} >
                 {!user  && <div onClick={onClose}><ProfileGuest /></div>}
-                {user  && <div ><ProfileUser /></div>}
+                {user  && <div onClick={onClose}><ProfileUser /></div>}
             </div>
         </div>
     </div>

@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
-// export default function useForm(primaryValues, onSubmitHandler) {
-//     const [ values, setValues ] = useState(primaryValues);
+type FormValues = {
+    [key: string]: any; 
+};
 
-//     const onChange = (e) => {
-//         setValues(state => ({...state, [e.target.name] : e.target.value}));
-//     };
+type OnSubmitHandler = (values: FormValues) => void;
 
-//     const onSubmit = (e) => {
-//         e.preventDefault();
+export default function useForm<T extends FormValues>(
+    primaryValues: T,
+    onSubmitHandler: any
+) {
+    const [values, setValues] = useState<T>(primaryValues);
 
-//         onSubmitHandler(values);
-//     };
 
-//     return {
-//         values,
-//         onChange,
-//         onSubmit,
-//         setValues,
-//     }
-// };
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setValues(state => ({ ...state, [name]: value }));
+    };
+
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        onSubmitHandler(values);
+    };
+
+    return {
+        values,
+        onChange,
+        onSubmit,
+        setValues,
+    };
+}

@@ -20,7 +20,7 @@ function App() {
   const user = getLocalStorage();
 
   if(user) {
-    dispatch(setUser({user}));
+    dispatch(setUser(user));
   };
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 let id: any;
 
 const notification = {
-     info : (message: string, autoClose: any) => toast.info(message, {
+     info : (message: string, autoClose?: any) => toast.info(message, {
         position: "top-left",
         autoClose: autoClose || 3000,
         hideProgressBar: false,
@@ -14,7 +14,7 @@ const notification = {
         theme: "dark",
 }),
 
-success : (message: string, autoClose: any) => {
+success : (message: string, autoClose?: any) => {
     toast.success(message, {
     position: "top-left",
     autoClose: autoClose || 3000,
@@ -26,7 +26,7 @@ success : (message: string, autoClose: any) => {
     theme: "dark",
 })},
 
- warning : (message: string, autoClose: any) => toast.warn(message, {
+ warning : (message: string, autoClose?: any) => toast.warn(message, {
     position: "top-left",
     autoClose: 3000 || autoClose,
     hideProgressBar: false,
@@ -37,7 +37,7 @@ success : (message: string, autoClose: any) => {
     theme: "dark",
 }),
 
- error : (message: string, autoClose: any) => toast.error(message, {
+ error : (message: string, autoClose?: any) => toast.error(message, {
     position: "top-left",
     autoClose: autoClose || 3000,
     hideProgressBar: true,
@@ -52,7 +52,7 @@ success : (message: string, autoClose: any) => {
     id = toast.loading(message);
 },
 
- update : (newMessage: string, autoClose: any, type: any) => toast.update(id, { 
+ update : (newMessage: string, autoClose?: any, type?: any) => toast.update(id, { 
     render: newMessage, type: type || 'success', isLoading: false , autoClose: autoClose || 2000, hideProgressBar: true
 }),
 

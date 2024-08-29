@@ -1,19 +1,20 @@
+import { LoginData, RegisterData, User } from '../types/User';
 import { get, post, del, put } from './request';
 
-// const endpoints = {
-//     register: '/users/register',
-//     login: '/users/login',
-//     logout: '/users/logout',
-//     edit: '/users/edit/',
-//     delete: '/users/',
-//     reservations: '/users/reservations/',
-// };
+const endpoints = {
+    register: '/users/register',
+    login: '/users/login',
+    logout: '/users/logout',
+    edit: '/users/edit/',
+    delete: '/users/',
+    reservations: '/users/reservations/',
+};
 
-// const login = async (data) => await post(endpoints.login, data);
+const login = async (data: LoginData) => await post(endpoints.login, data);
 
-// const register = async (data) => await post(endpoints.register, data);
+const register = async (data: RegisterData) => await post(endpoints.register, data);
 
-// const userLogout = async (user) => await get(endpoints.logout,null, user);
+const userLogout = async (user: User) => await get(endpoints.logout,null, user);
 
 // const userEdit = async (data, user) => await put(endpoints.edit + user._id, data, user);
 
@@ -21,14 +22,14 @@ import { get, post, del, put } from './request';
 
 // const userUpdateReservations = async (id, reservation, user) => await put(endpoints.reservations + id, reservation, user);
 
-// const getAllUserReservations = async () => await get(endpoints.reservations);
+const getAllUserReservations = async () => await get(endpoints.reservations);
 
-// export {
-//     login,
-//     register,
-//     userLogout,
-//     userEdit,
-//     userDelete,
-//     userUpdateReservations,
-//     getAllUserReservations,
-// }
+export {
+    login,
+    register,
+    userLogout,
+    // userEdit,
+    // userDelete,
+    // userUpdateReservations,
+    getAllUserReservations,
+}

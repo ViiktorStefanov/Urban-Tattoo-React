@@ -1,20 +1,37 @@
 import React, { useState } from 'react';
 import styles from './ProfileUser.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { FiEdit } from 'react-icons/fi';
 import { CgProfile, CgLogOut } from 'react-icons/cg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import notification from '../../services/notification';
+import { clearUser } from '../../store/authSlice';
+import { userLogout } from '../../services/authService';
 
 const ProfileUser: React.FC = () => {
 
+  const [isSubmit, setIsSubmit ] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const user = useSelector((state: RootState) => state.auth.user);
 
-  const [isSubmit, setIsSubmit ] = useState(false);
 
-  const onLogout = () => {
-    setIsSubmit(true);
+  const onLogout = async () => {
+    try {
+      setIsSubmit(true);
+      notification.loading('Please wait');
+      await userLogout(user!);
+      dispatch(clearUser())
+      notification.update('Logout successful');
+      navigate('/');
+    } catch (e: any) {
+      notification.update(e.message, 3000, 'error');
+    } finally {
+      setIsSubmit(false);
+    }
   }
 
   return (
