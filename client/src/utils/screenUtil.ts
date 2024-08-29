@@ -1,0 +1,1 @@
+export const checkIsMobile  = (): boolean => window.innerWidth >= 360 && window.innerWidth <= 428;

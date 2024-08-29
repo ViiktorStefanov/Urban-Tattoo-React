@@ -1,0 +1,114 @@
+.responsive-navigation-dropdown {
+    text-align: center;
+    font-family: inherit;
+  }
+  
+  .navigation-menu-trigger-ico {
+    position: absolute;
+    font-size: 35px;
+    top: 20px;
+    left: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .navigation-menu-trigger-ico:hover {
+    color: #f3d22d;
+  }
+  
+  .dropdown-navigation {
+    background-color: black;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    transform: translate(-100%, -100%);
+    transition: transform 900ms ease; 
+  }
+  
+  .dropdown-navigation ul li {
+    padding: 10px 0;
+    font-size: 28px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dropdown-navigation ul li:hover a {
+    color: #f3d22d;
+    cursor: pointer;
+  }
+  
+  .dropdown-navigation.active {
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    visibility: visible;
+    transform: translate(0, 0);
+    transition: 500ms ease;
+    z-index: 200;
+    background-color: black;
+  }
+  
+  .dropdown-navigation.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 500ms ease;
+  }
+  
+  .dropdown-navigation-dropdownItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px auto;
+  }
+  
+  .dropdown-navigation-dropdownItem-link {
+    transition: 500ms;
+    cursor: pointer;
+    color: white;
+  }
+
+  .logo-wrapper {
+    margin-top: 1%;
+    width: 350px;
+  }
+
+  .logo-wrapper img {
+    height: 100%;
+    width: 200px;
+  }
+  
+  .nav-logo {
+    width: 100%;
+    height: 100%;
+    cursor: unset;
+  }
+  
+  .nav-logo img {
+    width: 80%;
+    height: 100%;
+    margin-bottom: 20px;
+    cursor: unset;
+  }
+  
+  .close-icon {
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .close-icon:hover {
+    color: #f3d22d;
+  }
+  
+  @media screen and (min-width: 1025px) {
+    .responsive-navigation-dropdown {
+      display: none;
+    }
+  }
