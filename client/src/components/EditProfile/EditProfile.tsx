@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import styles from './EditProfile.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import useForm from '../../hooks/useForm';
 import useValidate from '../../hooks/useValidate';
 import { editProfileValidator } from '../../services/validation';
 import { editProfileMessages } from '../../constants/validationMessages';
 import { FiEdit } from 'react-icons/fi';
+import { EditProfileData } from '../../types/User';
+import notification from '../../services/notification';
+import { userDelete, userEdit } from '../../services/authService';
+import { clearUser, setIsFailed, setIsLoading, setIsSucessful, setUser } from '../../store/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile: React.FC = () => {
   const [isSubmit, setIsSubmit ] = useState(false);
   const [isDeleteSubmit, setIsDeleteSubmit ] = useState(false);
   const user = useSelector((state: RootState) => state.auth.user)!;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const primaryValues = {
     firstName: user.firstName,
@@ -25,12 +32,44 @@ const primaryValidationValues = {
     phone: false,
 };
 
-const onEditSubmit = async () => {
+const onEditSubmit = async (data: EditProfileData) => {
+    
+    if(!data.firstName || !data.lastName || !data.phone) {
+        return notification.warning('All fields are required');
+    };
 
+    try {
+        setIsSubmit(true);
+        dispatch(setIsLoading());
+        const result = await userEdit(data, user);
+        dispatch(setUser(result));
+        notification.success('Profile edited', 3000);
+        navigate(`/profile/${user._id}`);
+    } catch (e: any) {
+        dispatch(setIsFailed());
+        notification.error(e.message, 3000);
+    } finally {
+        setIsSubmit(false);
+        dispatch(setIsSucessful());
+    }
 };
 
 const onDelete = async () => {
-
+    try {
+        setIsSubmit(false);
+        setIsDeleteSubmit(true);
+        dispatch(setIsLoading());
+        await userDelete(user);
+        dispatch(clearUser());
+        notification.success('Your profile was deleted', 3000);
+        navigate('/');
+    } catch (e: any) {
+        dispatch(setIsFailed());
+        notification.error(e.message, 3000);
+    } finally {
+        setIsDeleteSubmit(false);
+        dispatch(setIsSucessful());
+    }
 };
 
 const { values, onChange, onSubmit } = useForm(primaryValues, onEditSubmit);

@@ -9,6 +9,7 @@ import notification from '../../services/notification';
 import { useDispatch } from 'react-redux';
 import { setIsFailed, setIsLoading, setIsSucessful, setUser } from '../../store/authSlice';
 import { register } from '../../services/authService';
+import { RegisterData } from '../../types/User';
 
 const Register: React.FC = () => {
 
@@ -34,7 +35,7 @@ const primaryValidationValues = {
     phone: false,
 };
 
-const onRegisterSubmit = async (data: any) => {
+const onRegisterSubmit = async (data: RegisterData) => {
     const { repeatPassword, ...registerData } = data;
 
     if(!data.firstName || !data.lastName || !data.phone || !data.email || !data.password || !data.repeatPassword) {

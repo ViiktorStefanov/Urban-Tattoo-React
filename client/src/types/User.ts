@@ -21,7 +21,7 @@ export type RegisterData = {
     lastName: string,
     email: string,
     password: string,
-    repeatPassword: string
+    repeatPassword?: string
     phone: string,
 };
 

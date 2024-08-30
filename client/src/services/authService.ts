@@ -18,7 +18,7 @@ const userLogout = async (user: User) => await get(endpoints.logout,null, user);
 
 const userEdit = async (data: EditProfileData, user: User) => await put(endpoints.edit + user._id, data, user);
 
-// const userDelete = async (user) => await del(endpoints.delete + user._id, null, user);
+const userDelete = async (user: User) => await del(endpoints.delete + user._id, null, user);
 
 // const userUpdateReservations = async (id, reservation, user) => await put(endpoints.reservations + id, reservation, user);
 
@@ -29,7 +29,7 @@ export {
     register,
     userLogout,
     userEdit,
-    // userDelete,
+    userDelete,
     // userUpdateReservations,
     getAllUserReservations,
 }
