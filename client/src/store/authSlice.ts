@@ -3,6 +3,7 @@ import { User } from '../types/User';
 
 import { checkIsMobile } from '../utils/screenUtil';
 import { clearLocalStorage, setLocalStorage } from '../services/localStorageService';
+import { Reservation } from '../types/Reservation';
 
 type AuthState = {
   user: User | null,
@@ -34,6 +35,12 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       clearLocalStorage();
     },
+    addUserReservation: (state, action: PayloadAction<Reservation>) => {
+      if (state.user) {
+        state.user.reservations = [...state.user.reservations, action.payload];
+        setLocalStorage(state.user);
+      }
+    },
     setIsMobile: (state, action: PayloadAction<boolean>) => {
       state.isMobile = action.payload;
     },
@@ -49,5 +56,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setIsMobile, setUser, clearUser, setIsLoading, setIsSucessful, setIsFailed } = authSlice.actions;
+export const { setIsMobile, setUser, clearUser, addUserReservation, setIsLoading, setIsSucessful, setIsFailed } = authSlice.actions;
 export default authSlice.reducer;

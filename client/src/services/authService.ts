@@ -1,3 +1,4 @@
+import { Reservation } from '../types/Reservation';
 import { EditProfileData, LoginData, RegisterData, User } from '../types/User';
 import { get, post, del, put } from './request';
 
@@ -20,7 +21,7 @@ const userEdit = async (data: EditProfileData, user: User) => await put(endpoint
 
 const userDelete = async (user: User) => await del(endpoints.delete + user._id, null, user);
 
-// const userUpdateReservations = async (id, reservation, user) => await put(endpoints.reservations + id, reservation, user);
+const userUpdateReservations = async (id: string, reservation: Reservation, user: User) => await put(endpoints.reservations + id, reservation, user);
 
 const getAllUserReservations = async () => await get(endpoints.reservations);
 
@@ -30,6 +31,6 @@ export {
     userLogout,
     userEdit,
     userDelete,
-    // userUpdateReservations,
+    userUpdateReservations,
     getAllUserReservations,
 }
